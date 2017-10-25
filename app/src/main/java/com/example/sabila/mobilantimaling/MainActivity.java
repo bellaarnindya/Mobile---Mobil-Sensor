@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setTitle("Mobilku");
         btnPaired = (Button)findViewById(R.id.buttonPaired);
         deviceList = (ListView)findViewById(R.id.deviceList);
 
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 String info = ((TextView) v).getText().toString();
                 String address = info.substring(info.length()-17);
 
-                Intent intent = new Intent(MainActivity.this, SensorControl.class);
+                Intent intent = new Intent(MainActivity.this, BluetoothConnectionService.class);
                 intent.putExtra(EXTRA_ADDRESS, address);
-                startActivity(intent);
+                startService(intent);
             }
         });
     }

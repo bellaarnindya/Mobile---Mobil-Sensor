@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -19,17 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SensorControl" />
         <activity android:name=".ResultActivity"></activity>
-        <activity android:name=".NotificationActivity" />
 
-        <service
-            android:name=".NotificationIntentService"
+        <service android:name=".BluetoothReceiverService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="true"/>
 
-        <receiver android:name=".NotificationEventReceiver"/>
-        <receiver android:name=".NotificationServiceStarterReceiver"/>
+        <service android:name=".BluetoothConnectionService"
+            android:enabled="true"
+            android:exported="true"/>
 
     </application>
 
