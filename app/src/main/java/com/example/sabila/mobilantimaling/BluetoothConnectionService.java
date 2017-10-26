@@ -67,15 +67,18 @@ public class BluetoothConnectionService extends Service {
                         );
                     }
                     else {
+                        isBtConnected = true;
                         new Handler(Looper.getMainLooper()).post(
                                 new Runnable() {
                                     public void run() {
                                         // yourContext is Activity or Application context
                                         Toast.makeText(getApplicationContext(), "Connected.", Toast.LENGTH_SHORT).show();
+                                        MainActivity.updateConnectedDeviceName();
+
                                     }
                                 }
                         );
-                        isBtConnected = true;
+
                         Intent intentReceiver = new Intent(BluetoothConnectionService.this, BluetoothReceiverService.class);
                         startService(intentReceiver);
                     }

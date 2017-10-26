@@ -96,7 +96,7 @@ public class BluetoothReceiverService extends Service {
                                 }
                             }
                             Log.d("INPUT DATA", msg);
-                            if (msg.equals("ON")){
+                            if (msg.contains("N")){
                                 Log.d("ON", "MALING");
                                 Intent resultIntent = new Intent(BluetoothReceiverService.this, ResultActivity.class);
                                 resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

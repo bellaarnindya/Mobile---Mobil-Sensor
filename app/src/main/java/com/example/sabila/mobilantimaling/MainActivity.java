@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter myBluetooth = null;
     private Set<BluetoothDevice> pairedDevices;
     private String EXTRA_ADDRESS = "THE ADDRESS";
+    public static TextView textBluetooth;
+    public static String connectedDeviceName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Mobilku");
         btnPaired = (Button)findViewById(R.id.buttonPaired);
         deviceList = (ListView)findViewById(R.id.deviceList);
+
+        textBluetooth = (TextView) findViewById(R.id.textBluetooth);
+        connectedDeviceName = "Tidak ada";
 
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
         if (myBluetooth==null) {
@@ -76,8 +83,19 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, BluetoothConnectionService.class);
                 intent.putExtra(EXTRA_ADDRESS, address);
+                connectedDeviceName = info.substring(0, info.length()-17);
                 startService(intent);
             }
         });
+    }
+
+    public static void updateConnectedDeviceName(){
+       // textBluetooth = (TextView) findViewById(R.id.textBluetooth);
+
+        if(!BluetoothConnectionService.isBtConnected){
+            connectedDeviceName = "None";
+        }
+        textBluetooth.setText("Connected Device: " + connectedDeviceName);
+
     }
 }
